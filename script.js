@@ -1,5 +1,5 @@
 const DOG_URL = "https://dog.ceo/api/breeds/image/random";
-const dogButton = document.querySelector('.dog-btn');
+const getADog = document.querySelector('.get-dog-btn');
 const doggos = document.querySelector('.doggos');
 
 function addNewDog() {
@@ -16,4 +16,4 @@ function addNewDog() {
     });
 }
 
-dogButton.addEventListener('click', addNewDog)
+getADog.addEventListener('click', addNewDog)
