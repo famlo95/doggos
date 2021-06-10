@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-* {
+:root {
+    --select-border: #777;
+    --select-focus: black;
+    --select-arrow: var(--select-border);
+}
+
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
@@ -9,7 +18,7 @@ body {
     padding: 0;
     font-family: 'Staatliches','Open Sans', sans-serif;
     font-size: 16px;
-    background-color: rgb(235, 235, 235);
+    background-color: black;
 }
 
 h1 {
@@ -21,39 +30,92 @@ h1 {
     letter-spacing: 0.3em;
     padding-left: 0.3em;
     font-variant: small-caps;
+    color: white;
+}
+
+label {
+    user-select: none;
+    line-height: 1.5em;
+    font-size: 1.1em;
+    color: white;
 }
 
 .container {
     display: flex;
     justify-content: center;
     width: 100%;
+}
+
+select {
+    /* A reset of styles, including removing the default dropdown arrow */
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    cursor: inherit;
+    line-height: inherit;
+    outline: none;
+    z-index: 1;
+}
+
+.select-container {
+    display: grid;
+    align-items: center;
+    grid-template-areas: "select";
+    width: 100%;
+    min-width: 15ch;
+    max-width: 30ch;
+    border: 1px solid var(--select-border);
+    border-radius: 0.15em;
+    padding: 0.25em 0.5em;
+    font-size: 1.25em;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
+    position: relative;
+    margin-top: 0.5em;
+}
+
+select, .select-container::after {
+    grid-area: select;
+}
+
+.select-container::after {
+    content: "";
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--select-arrow);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+    justify-self: end;
+}
+
+.select-container:hover::after {
+    background-color: var(--select-focus);
+}
+
+.select-container:focus-within {
+    border: 0.1em solid white;
+    border-radius: inherit;
+    color: var(--select-focus);
+    background-color: black;
+}
+
+.doggos-container {
+    display: flex;
+    margin: 1.5em;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
-.get-dog-btn {
-    border-radius: 0;
-    font-size: 1.5em;
-    font-weight: 300;
-    background-color: black;
-    color: white;
-    width: 10em;
-    border: 0.1em solid white;
-    cursor: pointer;
-    padding: 1em 0;
-}
-
-.get-dog-btn:hover {
-    background-color: white;
-    color: black;
-    outline: 0.3em solid black;
-    font-weight: 400;
-}
-
-.get-dog-btn:active {
-    background-color: gray;
-}
-
-.container .doggos img{
+.doggos-container img{
     display: flex;
     align-items: stretch;
+    max-width: 100%;
+    object-fit: cover;
+    vertical-align: bottom;
+    margin: 0.1em;
 }

@@ -11,13 +11,21 @@
     <header class="container">
         <h1>doggos</h1>
     </header>
-    <main>
+    <center><label>Select a breed</label></center>
+    <!-- <main class="container"> -->
         <div class="container">
-            <button class="get-dog-btn">Get a dog picture!</button>
+            <div class="select-container">
+                <!-- <button class="get-dog-btn">Get a dog picture!</button> -->
+                <select id="select-breed" name="listBreeds[]">
+                    <option value="0" class="test">Select a breed</option>
+                    <!-- <option value="">Select your favorite breed</option> -->
+                    <!-- <option value="3">Chihuahua</option> -->
+                </select>
+            </div>
         </div>
-        <div id="container loader"></div>
-        <div class="container doggos"></div>
-    </main>
+        <!-- <div id="container loader"></div> -->
+        <div class="doggos-container"></div>
+    <!-- </main> -->
     <script src="script.js"></script>
 </body>
 </html>
