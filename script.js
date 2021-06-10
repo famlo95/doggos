@@ -1,17 +1,12 @@
 // List of breeds
 const BREEDS_URL = "https://dog.ceo/api/breeds/list/all";
 
-// Random dog of one breed
-let breed_url = "https://dog.ceo/api/breeds/image/random";
+// Piece of the needed url to show a dog from an specified breed
+let breed_url = "https://dog.ceo/api/breed/";
 
 let listBreeds = document.querySelector('#select-breed');
-// listBreeds.length = 0;
 
-// let defaultOption = document.createElement('option');
-// defaultOption.text = 'Choose Breed';
-
-// listBreeds.add(defaultOption);
-// listBreeds.selectedIndex = 0;
+const doggos = document.querySelector('.doggos-container');
 
 function addBreeds() {
     const promise = fetch(BREEDS_URL);
@@ -21,6 +16,7 @@ function addBreeds() {
     })
     .then(function (processedResponse) {
         const object = processedResponse.message;
+        
         // Converting response into an array
         const breeds = Object.entries(object);
 
@@ -36,36 +32,32 @@ function addBreeds() {
     });
 }
 
-// breed_url = `${breed_url}${key}/images/random`;
+// Populate the select with the breeds gotten from the API
+addBreeds();
 
+// Get the value of the option selected and add the string to breed_url
+listBreeds.addEventListener('change', function (e) {
+    console.log(e.target.value);
+    breed_url = `${breed_url}${e.target.value}/images/random`;
 
-const doggos = document.querySelector('.doggos-container');
+    // Shows a dog when a breed is selected
+    showADog(breed_url);
 
-// Shows a dog when an option is selected
-function showADog() {
-    const promise = fetch(breed_url);
+    // Update the url
+    breed_url = "https://dog.ceo/api/breed/";
+});
+
+function showADog(url) {
+    const promise = fetch(url);
     promise.then(function (response) {
         const processingPromise = response.json();
         return processingPromise;
     })
     .then(function (processedResponse) {
-        const oneDog = document.createElement('img');
+        let oneDog = document.createElement('img');
+        oneDog.className = 'loading';
         oneDog.src = processedResponse.message;
         oneDog.alt = "Cute doggo";
         doggos.appendChild(oneDog);
     });
 }
-
-addBreeds();
-// listBreeds.addEventListener('click', addBreeds);
-
-listBreeds.addEventListener('change', function (e) {
-    console.clear();
-    if (e.target.className === 'breed-selected') {
-        let breedSelected = e.target.innerText;
-        console.log(breedSelected);
-    } else {
-        console.log('no breed selected');
-    }
-    
-})

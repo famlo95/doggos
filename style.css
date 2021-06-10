@@ -104,6 +104,11 @@ select, .select-container::after {
     background-color: black;
 }
 
+/* Loading gif while the image is being loaded */
+.loading {
+    background: transparent url(https://i.gifer.com/2cOP.gif) center no-repeat;
+}
+
 .doggos-container {
     display: flex;
     margin: 1.5em;
